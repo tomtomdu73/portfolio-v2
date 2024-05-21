@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion'
 import Link from 'next/link'
 
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/cn'
 
 export const FloatingNav = ({
   navItems,

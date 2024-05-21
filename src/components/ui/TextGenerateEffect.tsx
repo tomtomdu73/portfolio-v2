@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 import { motion, stagger, useAnimate } from 'framer-motion'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/cn'
 
 export const TextGenerateEffect = ({ words, className }: { words: string; className?: string }) => {
   const [scope, animate] = useAnimate()
@@ -30,7 +30,7 @@ export const TextGenerateEffect = ({ words, className }: { words: string; classN
             <motion.span
               key={word + idx}
               // change here if idx is greater than 3, change the text color to #CBACF9
-              className={` ${idx > 3 && word != 'and' ? 'text-lime-500' : 'text-black dark:text-white'} opacity-0`}
+              className={` ${idx > 3 && word != 'and' ? 'text-teal-500' : 'text-black dark:text-white'} opacity-0`}
             >
               {word}{' '}
             </motion.span>

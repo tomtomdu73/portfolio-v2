@@ -1,5 +1,6 @@
 'use client'
 
+import Grid from '@/components/Grid'
 import Hero from '@/components/Hero'
 
 // import Footer from "@/components/Footer";
@@ -18,11 +19,13 @@ export const navItems = [
 
 const Home = () => {
   return (
-    <main className="relative mx-auto flex flex-col items-center justify-center overflow-hidden bg-white">
+    <main className="relative mx-auto flex flex-col items-center justify-center overflow-hidden bg-zinc-50/30">
       <div className="w-full">
         <FloatingNav navItems={navItems} />
         <Hero />
-        <Hero />
+        <div className="mx-auto max-w-7xl px-5 sm:px-10 ">
+          <Grid />
+        </div>
       </div>
     </main>
   )

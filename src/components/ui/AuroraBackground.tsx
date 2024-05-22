@@ -17,7 +17,7 @@ export const AuroraBackground = ({
     <main>
       <div
         className={cn(
-          'transition-bg relative flex h-[100vh] flex-col items-center justify-center bg-zinc-50 text-slate-950 dark:bg-zinc-900',
+          'transition-bg relative flex h-[89vh] flex-col items-center justify-center bg-zinc-50 text-slate-950 dark:bg-zinc-900',
           className
         )}
         {...props}
@@ -33,7 +33,7 @@ export const AuroraBackground = ({
             opacity-50
             blur-[10px]
             invert
-            filter will-change-transform [--aurora:repeating-linear-gradient(100deg,var(--teal-400)_10%,var(--cyan-200)_15%,var(--teal-200)_20%,var(--emerald-200)_25%,var(--teal-300)_30%)] [--dark-gradient:repeating-linear-gradient(100deg,var(--black)_0%,var(--black)_7%,var(--transparent)_10%,var(--transparent)_12%,var(--black)_16%)]
+            filter will-change-transform [--aurora:repeating-linear-gradient(100deg,var(--orange-500)_10%,var(--sunflower-400)_15%,var(--orange-300)_20%,var(--sunflower-500)_25%,var(--sunflower-600)_30%)] [--dark-gradient:repeating-linear-gradient(100deg,var(--black)_0%,var(--black)_7%,var(--transparent)_10%,var(--transparent)_12%,var(--black)_16%)]
             [--white-gradient:repeating-linear-gradient(100deg,var(--white)_0%,var(--white)_7%,var(--transparent)_10%,var(--transparent)_12%,var(--white)_16%)] [background-image:var(--white-gradient),var(--aurora)] [background-position:50%_50%,50%_50%] [background-size:300%,_200%] 
             after:absolute
             after:inset-0 

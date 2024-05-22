@@ -1,7 +1,10 @@
 'use client'
 
+import Clients from '@/components/Client'
+import Footer from '@/components/Footer'
 import Grid from '@/components/Grid'
 import Hero from '@/components/Hero'
+import RecentProjects from '@/components/RecentProjects'
 
 // import Footer from "@/components/Footer";
 // import Clients from "@/components/Clients";
@@ -19,12 +22,15 @@ export const navItems = [
 
 const Home = () => {
   return (
-    <main className="relative mx-auto flex flex-col items-center justify-center overflow-hidden bg-zinc-50/30">
+    <main className="relative mx-auto overflow-hidden bg-zinc-50/30 dark:bg-black">
       <div className="w-full">
         <FloatingNav navItems={navItems} />
         <Hero />
         <div className="mx-auto max-w-7xl px-5 sm:px-10 ">
           <Grid />
+          <RecentProjects />
+          <Clients />
+          <Footer />
         </div>
       </div>
     </main>

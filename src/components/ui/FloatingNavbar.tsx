@@ -58,14 +58,11 @@ export const FloatingNav = ({
           // change rounded-full to rounded-lg
           // remove dark:border-white/[0.2] dark:bg-black bg-white border-transparent
           // change  pr-2 pl-8 py-2 to px-10 py-5
-          'border-black/.1 fixed inset-x-0 top-10 z-[5000] mx-auto flex max-w-fit items-center justify-center space-x-4 rounded-lg border px-10 py-5 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] md:min-w-[70vw] lg:min-w-fit',
+          'fixed inset-x-0 top-10 z-[5000] mx-auto flex max-w-fit items-center justify-center space-x-4 border border-black/[0.2] bg-white px-10 py-5 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] dark:border-white/[0.2] dark:bg-black md:min-w-[70vw] lg:min-w-fit',
           className
         )}
         style={{
           backdropFilter: 'blur(16px) saturate(180%)',
-          backgroundColor: 'rgba(255, 255, 255, 0.75)',
-          borderRadius: '0px',
-          border: '1px solid rgba(255, 255, 255, 0.125)',
         }}
       >
         {navItems.map((navItem: any, idx: number) => (
@@ -73,7 +70,7 @@ export const FloatingNav = ({
             key={`link=${idx}`}
             href={navItem.link}
             className={cn(
-              'relative flex items-center space-x-1 text-neutral-600 hover:text-neutral-500 dark:text-neutral-50 dark:hover:text-neutral-300'
+              'hover:text-sunflower-600 relative flex items-center space-x-1 text-neutral-600 transition duration-200 ease-in-out dark:text-neutral-50 dark:hover:text-neutral-300'
             )}
           >
             <span className="block sm:hidden">{navItem.icon}</span>

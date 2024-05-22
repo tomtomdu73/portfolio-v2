@@ -30,7 +30,7 @@ export const TextGenerateEffect = ({ words, className }: { words: string; classN
             <motion.span
               key={word + idx}
               // change here if idx is greater than 3, change the text color to #CBACF9
-              className={` ${idx > 3 && word != 'and' ? 'text-teal-500' : 'text-black dark:text-white'} opacity-0`}
+              className={` ${idx > 3 && word != 'and' ? 'text-sunflower-600' : 'text-black dark:text-white'} opacity-0`}
             >
               {word}{' '}
             </motion.span>
@@ -45,9 +45,7 @@ export const TextGenerateEffect = ({ words, className }: { words: string; classN
       {/* mt-4 to my-4 */}
       <div className="my-4">
         {/* remove  text-2xl from the original */}
-        <div className=" leading-snug tracking-wide text-black dark:text-white">
-          {renderWords()}
-        </div>
+        <div className="leading-snug tracking-wide text-black dark:text-white">{renderWords()}</div>
       </div>
     </div>
   )

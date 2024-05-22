@@ -1,9 +1,10 @@
 import { BentoGrid, BentoGridItem } from '@/components/ui/BentoGrid'
 import { gridItems } from '@/data'
+import Section from './ui/Section'
 
 const Grid = () => {
   return (
-    <section id="about">
+    <Section id="about">
       <BentoGrid className="w-full py-20">
         {gridItems.map((item, i) => (
           <BentoGridItem
@@ -19,7 +20,7 @@ const Grid = () => {
           />
         ))}
       </BentoGrid>
-    </section>
+    </Section>
   )
 }
 

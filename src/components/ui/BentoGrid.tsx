@@ -8,6 +8,7 @@ import animationData from '@/data/confetti.json'
 import MagicButton from '../MagicButton'
 import GridGlobe from './GridGlobe'
 import { BackgroundGradientAnimation } from './GradientBg'
+import { Icon } from './EvervaultCard'
 
 export const BentoGrid = ({
   className,
@@ -73,18 +74,23 @@ export const BentoGridItem = ({
     <div
       className={cn(
         // remove p-4 rounded-3xl dark:bg-black dark:border-white/[0.2] bg-white  border border-transparent, add border border-white/[0.1] overflow-hidden relative
-        'group/bento relative row-span-1 flex flex-col justify-between space-y-4 overflow-hidden border border-white/[0.1] bg-teal-100 shadow-input transition duration-200 hover:shadow-xl dark:shadow-none',
+        'group/bento relative row-span-1 flex flex-col justify-between border border-black/[0.2] transition duration-200 dark:border-white/[0.2]',
         className
       )}
-      style={{
-        //   add these two
-        //   you can generate the color from here https://cssgradient.io/
-
-        backgroundColor: 'linear-gradient(90deg, rgba(4,7,29,1) 0%, rgba(12,14,35,1) 100%)',
-      }}
+      style={
+        {
+          //   add these two
+          //   you can generate the color from here https://cssgradient.io/
+          // backgroundColor: 'linear-gradient(90deg, rgba(4,7,29,1) 0%, rgba(12,14,35,1) 100%)',
+        }
+      }
     >
+      <Icon className="absolute -left-3 -top-3 h-6 w-6 text-black dark:text-white" />
+      <Icon className="absolute -bottom-3 -left-3 h-6 w-6 text-black dark:text-white" />
+      <Icon className="absolute -right-3 -top-3 h-6 w-6 text-black dark:text-white" />
+      <Icon className="absolute -bottom-3 -right-3 h-6 w-6 text-black dark:text-white" />
       {/* add img divs */}
-      <div className={`${id === 6 && 'flex justify-center'} h-full`}>
+      <div className={`${id === 6 && 'flex justify-center'} h-full overflow-hidden`}>
         <div className="absolute h-full w-full">
           {img && (
             <img src={img} alt={img} className={cn(imgClassName, 'object-cover object-center ')} />

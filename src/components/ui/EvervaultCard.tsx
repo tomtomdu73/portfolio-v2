@@ -39,22 +39,6 @@ export function CardPattern({ mouseX, mouseY, randomString }: any) {
   )
 }
 
-export const Icon = ({ className, ...rest }: any) => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      strokeWidth="1.5"
-      stroke="currentColor"
-      className={className}
-      {...rest}
-    >
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m6-6H6" />
-    </svg>
-  )
-}
-
 export const EvervaultCard = ({ text, className }: { text?: string; className?: string }) => {
   let mouseX = useMotionValue(0)
   let mouseY = useMotionValue(0)

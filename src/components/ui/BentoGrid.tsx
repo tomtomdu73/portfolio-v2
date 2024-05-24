@@ -8,7 +8,7 @@ import animationData from '@/data/confetti.json'
 import MagicButton from '../MagicButton'
 import GridGlobe from './GridGlobe'
 import { BackgroundGradientAnimation } from './GradientBg'
-import { Icon } from './EvervaultCard'
+import CornerIcons from './CornerIcons'
 
 export const BentoGrid = ({
   className,
@@ -85,10 +85,8 @@ export const BentoGridItem = ({
         }
       }
     >
-      <Icon className="absolute -left-3 -top-3 h-6 w-6 text-black dark:text-white" />
-      <Icon className="absolute -bottom-3 -left-3 h-6 w-6 text-black dark:text-white" />
-      <Icon className="absolute -right-3 -top-3 h-6 w-6 text-black dark:text-white" />
-      <Icon className="absolute -bottom-3 -right-3 h-6 w-6 text-black dark:text-white" />
+      <CornerIcons />
+
       {/* add img divs */}
       <div className={`${id === 6 && 'flex justify-center'} h-full overflow-hidden`}>
         <div className="absolute h-full w-full">
@@ -134,7 +132,7 @@ export const BentoGridItem = ({
           </div>
 
           {/* for the github 3d globe */}
-          {id === 2 && <GridGlobe />}
+          {/* {id === 2 && <GridGlobe />} */}
 
           {/* Tech stack list div */}
           {id === 3 && (

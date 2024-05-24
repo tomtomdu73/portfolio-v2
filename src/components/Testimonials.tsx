@@ -6,9 +6,9 @@ import { companies, testimonials } from '@/data'
 import { InfiniteMovingCards } from './ui/InfinityCards'
 import Section from './ui/Section'
 
-const Clients = () => {
+const Testimonials = () => {
   return (
-    <Section id="testimonials" className="py-20">
+    <Section id="testimonials" className="pb-20 pt-28">
       <h2 className="heading">
         Kind words from
         <span className="text-sunflower-600"> satisfied clients</span>
@@ -26,4 +26,4 @@ const Clients = () => {
   )
 }
 
-export default Clients
+export default Testimonials

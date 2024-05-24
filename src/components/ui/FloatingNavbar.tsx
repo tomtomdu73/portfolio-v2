@@ -5,6 +5,7 @@ import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-
 import Link from 'next/link'
 
 import { cn } from '@/utils/cn'
+import CornerIcons from './CornerIcons'
 
 export const FloatingNav = ({
   navItems,
@@ -55,16 +56,15 @@ export const FloatingNav = ({
           duration: 0.2,
         }}
         className={cn(
-          // change rounded-full to rounded-lg
-          // remove dark:border-white/[0.2] dark:bg-black bg-white border-transparent
-          // change  pr-2 pl-8 py-2 to px-10 py-5
-          'fixed inset-x-0 top-10 z-[5000] mx-auto flex max-w-fit items-center justify-center space-x-4 border border-black/[0.2] bg-white px-10 py-5 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] dark:border-white/[0.2] dark:bg-black md:min-w-[70vw] lg:min-w-fit',
+          'fixed inset-x-0 top-10 z-[5000] mx-auto flex max-w-fit items-center justify-center gap-2 border border-black/[0.2] bg-white px-10 py-5 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] dark:border-white/[0.2] dark:bg-black md:min-w-[70vw] lg:min-w-fit',
           className
         )}
         style={{
           backdropFilter: 'blur(16px) saturate(180%)',
         }}
       >
+        <CornerIcons />
+
         {navItems.map((navItem: any, idx: number) => (
           <Link
             key={`link=${idx}`}

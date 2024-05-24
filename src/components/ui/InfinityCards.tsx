@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from 'react'
 
 import { cn } from '@/utils/cn'
+import { Icon } from './EvervaultCard'
+import CornerIcons from './CornerIcons'
 
 export const InfiniteMovingCards = ({
   items,
@@ -96,6 +98,8 @@ export const InfiniteMovingCards = ({
             // change to idx cuz we have the same name
             key={idx}
           >
+            <CornerIcons />
+
             <blockquote>
               <div
                 aria-hidden="true"

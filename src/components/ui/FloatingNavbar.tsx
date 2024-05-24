@@ -76,7 +76,7 @@ export const FloatingNav = ({
             <span className="block sm:hidden">{navItem.icon}</span>
             {/* add !cursor-pointer */}
             {/* remove hidden sm:block for the mobile responsive */}
-            <span className=" !cursor-pointer text-sm">{navItem.name}</span>
+            <span className=" !cursor-pointer text-xs md:text-sm">{navItem.name}</span>
           </Link>
         ))}
       </motion.div>

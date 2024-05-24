@@ -11,7 +11,7 @@ const RecentProjects = () => {
       <h2 className="heading">
         A small selection of <span className="text-sunflower-600">recent projects</span>
       </h2>
-      <div className="mt-10 flex flex-wrap items-center justify-center gap-6">
+      <div className="mt-20 flex flex-wrap items-center justify-center gap-6">
         {projects.map((item, key) => (
           <div
             key={key}

@@ -11,17 +11,27 @@ export default defineType({
       type: 'string',
     }),
     defineField({
-      name: 'slug',
-      title: 'Slug',
-      type: 'slug',
-      options: {
-        source: 'name',
-        maxLength: 96,
-      },
+      name: 'bio',
+      title: 'Bio',
+      type: 'string',
+      validation: (Rule) => Rule.required().max(155),
     }),
     defineField({
-      name: 'image',
-      title: 'Image',
+      name: 'review',
+      title: 'Review',
+      type: 'array',
+      of: [
+        {
+          title: 'Block',
+          type: 'block',
+          styles: [{ title: 'Normal', value: 'normal' }],
+          lists: [],
+        },
+      ],
+    }),
+    defineField({
+      name: 'avatar',
+      title: 'Avatar',
       type: 'image',
       options: {
         hotspot: true,
@@ -34,24 +44,11 @@ export default defineType({
         },
       ],
     }),
-    defineField({
-      name: 'bio',
-      title: 'Bio',
-      type: 'array',
-      of: [
-        {
-          title: 'Block',
-          type: 'block',
-          styles: [{ title: 'Normal', value: 'normal' }],
-          lists: [],
-        },
-      ],
-    }),
   ],
   preview: {
     select: {
       title: 'name',
-      media: 'image',
+      media: 'avatar',
     },
   },
 })

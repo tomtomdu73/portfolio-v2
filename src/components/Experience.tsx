@@ -1,19 +1,17 @@
 import React, { useRef } from 'react'
+import { useInView } from 'framer-motion'
+import { PortableText } from 'next-sanity'
 
-import { workExperience } from '@/data'
 import Section from './ui/Section'
 import { TracingBeam } from './ui/TracingBeam'
 import CornerIcons from './ui/CornerIcons'
-import { useInView } from 'framer-motion'
+import { ExperienceType, getExperiences } from '@/lib/sanity'
+import Image from 'next/image'
+import { urlForImage } from '@/sanity/lib/image'
 
 interface ExperienceItemProps {
   key: number
-  item: {
-    title: string
-    description: JSX.Element
-    badge: string
-    image: string
-  }
+  item: ExperienceType
 }
 
 const ExperienceItem = ({ key, item }: ExperienceItemProps) => {
@@ -32,27 +30,31 @@ const ExperienceItem = ({ key, item }: ExperienceItemProps) => {
       }}
     >
       <CornerIcons />
-      <h2 className="mb-4 w-fit bg-black px-4 py-1 text-sm text-white">{item.badge}</h2>
+      <h2 className="mb-4 w-fit bg-black px-4 py-1 text-sm text-white">{item.title}</h2>
 
-      <p className="mb-4 text-xl">{item.title}</p>
+      <p className="mb-4 text-xl">{item.company}</p>
 
       <div className="prose  prose-sm dark:prose-invert text-sm">
-        {/* {item?.image && (
-                  <Image
-                    src={item.image}
-                    alt="blog thumbnail"
-                    height="1000"
-                    width="1000"
-                    className="mb-10 rounded-lg object-cover"
-                  />
-                )} */}
-        {item.description}
+        {item?.logo && (
+          <Image
+            src={urlForImage(item.logo)}
+            alt="blog thumbnail"
+            height="1000"
+            width="1000"
+            className="mb-10 rounded-lg object-cover"
+          />
+        )}
+        <PortableText value={item.description} />
       </div>
     </div>
   )
 }
 
-const Experience = () => {
+const Experience = async () => {
+  const experiences = await getExperiences()
+
+  console.log(experiences)
+
   return (
     <Section id="experience" className="w-full py-20">
       <h2 className="heading">
@@ -61,7 +63,7 @@ const Experience = () => {
       <div className="mt-20 flex items-center justify-center">
         <TracingBeam>
           <div className="relative mx-auto flex max-w-2xl flex-col space-y-6 pt-4 antialiased">
-            {workExperience.map((item, index) => (
+            {experiences.map((item, index) => (
               <ExperienceItem key={index} item={item} />
             ))}
           </div>

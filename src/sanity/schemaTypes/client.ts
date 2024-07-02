@@ -1,13 +1,8 @@
 import { defineField, defineType } from 'sanity'
 
-export const PROJECT_TYPE_OPTIONS = [
-  { title: 'Personal', value: 'personal' },
-  { title: 'Client', value: 'client' },
-]
-
 export default defineType({
-  name: 'project',
-  title: 'Project',
+  name: 'client',
+  title: 'Client',
   type: 'document',
   fields: [
     defineField({
@@ -23,13 +18,10 @@ export default defineType({
       validation: (Rule) => Rule.required().max(300),
     }),
     defineField({
-      name: 'type',
-      title: 'Project type',
-      type: 'string',
-      options: {
-        list: PROJECT_TYPE_OPTIONS.map(({ title, value }) => ({ title, value })),
-        layout: 'radio',
-      },
+      name: 'endDate',
+      title: 'End Date',
+      type: 'datetime',
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'projectUrl',

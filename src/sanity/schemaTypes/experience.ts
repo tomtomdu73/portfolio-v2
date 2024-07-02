@@ -21,7 +21,6 @@ export default defineType({
       name: 'companyUrl',
       type: 'url',
       title: 'company url',
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'description',

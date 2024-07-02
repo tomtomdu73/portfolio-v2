@@ -10,7 +10,7 @@ export interface Testimonial {
   review: PortableTextBlock[]
 }
 
-export interface Product {
+export interface ProductType {
   id: string
   name: string
   bio: string
@@ -21,6 +21,7 @@ export interface ExperienceType {
   id: string
   title: string
   company: string
+  companyUrl?: string
   description: PortableTextBlock[]
   startDate: string
   endDate?: string
@@ -29,12 +30,13 @@ export interface ExperienceType {
   logo: Image
 }
 
-export interface ProjectType {
+export interface ClientType {
   id: string
   title: string
   description: string
   logo: Image
   stacks: string[]
+  endDate: string
 }
 
 export async function getTestimonials(): Promise<Testimonial[]> {
@@ -52,18 +54,15 @@ export async function getTestimonials(): Promise<Testimonial[]> {
     }`
   )
 }
-export async function getProducts(): Promise<Product[]> {
-  return client.fetch<Product[]>(
+
+export async function getProducts(): Promise<ProductType[]> {
+  return client.fetch<ProductType[]>(
     groq`*[_type == "product"] {
           "id": _id,
-          name,
-          bio,
-        review[]{
-            ...,
-            markDefs[]{
-                ...
-            }
-        },
+          title,
+          description,
+          videoUrl,
+          image
     }`
   )
 }
@@ -73,6 +72,7 @@ export async function getExperiences(): Promise<ExperienceType[]> {
           "id": _id,
           title,
           company,
+          companyUrl,
           logo,
           location,
           description[]{
@@ -87,14 +87,15 @@ export async function getExperiences(): Promise<ExperienceType[]> {
     }`
   )
 }
-export async function getProjects(): Promise<ProjectType[]> {
-  return client.fetch<ProjectType[]>(
-    groq`*[_type == "project"] {
+export async function getClients(): Promise<ClientType[]> {
+  return client.fetch<ClientType[]>(
+    groq`*[_type == "client"] {
           "id": _id,
           title,
           description,
           logo,
           stacks,
+          endDate
     }`
   )
 }

@@ -1,0 +1,164 @@
+:root {
+  --color-bg-effect: rgba(229, 222, 204, 0.3);
+}
+
+.demo-4::after {
+  display: none;
+}
+
+.animated-list-section {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  z-index: 100;
+}
+
+.list {
+  z-index: 1000;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  counter-reset: item 0;
+}
+
+.list__item {
+  font-size: 3rem;
+  cursor: pointer;
+  width: 100%;
+  display: grid;
+  color: var(--color-list-item);
+  grid-column-gap: 2rem;
+  padding: 0.5rem 0;
+  grid-template-columns: 100%;
+  justify-content: space-between;
+  align-items: start;
+  justify-items: start;
+}
+
+.demo-4 .list__item {
+  padding: 0.85rem 0;
+}
+
+.list__item::before {
+  color: var(--color-number);
+  content: counter(item, decimal-leading-zero);
+  counter-increment: item;
+  font-weight: 500;
+  padding: 3px 3px 0;
+  line-height: 0.8;
+}
+
+.demo-4 .list__item::before {
+  font-size: 0.8rem;
+}
+
+.list--alt .list__item::before {
+  content: 'EVT#' counter(item, decimal-leading-zero) '0';
+}
+
+.list__item-col {
+  flex: none;
+  padding: 3px 3px 0;
+  line-height: 0.8;
+}
+
+.hover-effect .word {
+  white-space: nowrap;
+}
+
+.hover-effect .char {
+  position: relative;
+}
+
+.hover-effect {
+  font-kerning: none;
+  position: relative;
+  white-space: nowrap;
+}
+
+.hover-effect--cursor-square .char {
+  --opa: 0;
+}
+
+.hover-effect--cursor-square .char::after {
+  content: '';
+  width: 1ch;
+  top: 0;
+  left: 0;
+  position: absolute;
+  opacity: var(--opa);
+}
+
+.hover-effect--cursor-square .char::after {
+  background: currentColor;
+  height: 100%;
+}
+
+.hover-effect--bg,
+.hover-effect--bg-south {
+  --anim: 0;
+}
+
+.hover-effect--bg::after,
+.hover-effect--bg-south::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: calc(100% + 3px);
+  top: 0;
+  background-color: var(--color-bg-effect);
+  mix-blend-mode: var(--blendmode-effect);
+  -webkit-backdrop-filter: blur(var(--bg-blur));
+  backdrop-filter: blur(var(--bg-blur));
+  transform-origin: 0% 50%;
+  transform: scaleX(var(--anim));
+}
+
+.hover-effect--bg-south::after {
+  z-index: -1;
+  left: -8px;
+  right: -8px;
+  top: -8px;
+  bottom: -8px;
+  border-radius: 2px;
+  height: auto;
+  width: auto;
+  transform-origin: 50% 100%;
+  transform: scaleY(var(--anim));
+}
+
+@media screen and (min-width: 40em) {
+  .list__item {
+    grid-template-columns: auto 1fr 1fr 1fr auto;
+  }
+}
+
+@media screen and (min-width: 53em) {
+  .frame {
+    grid-template-columns: auto auto auto auto 1fr 1fr;
+    grid-template-areas: 'title back archive github demos sponsor';
+  }
+  .frame #cdawrap,
+  .frame__demos {
+    justify-self: end;
+  }
+  .frame #cdawrap {
+    text-align: right;
+  }
+}
+
+@media screen and (min-width: 73em) {
+  .list__item {
+    grid-template-columns: 100px 30% 1fr 1fr 1fr;
+  }
+  .demo-4 .list__item {
+    grid-template-columns: 100px 1fr 1fr auto;
+  }
+  .list__item-col:last-child {
+    justify-self: end;
+  }
+}

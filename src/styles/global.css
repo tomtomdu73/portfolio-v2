@@ -19,6 +19,24 @@
   --trans-content: -40vh;
 }
 
+.demo-4 {
+  --color-text: #fff;
+  --color-bg: #8c2828;
+  --color-link: #515151;
+  --color-link-hover: #fff;
+  --color-list-item: #ffffffd9;
+  --color-title: #2d2d2d;
+  --color-number: #615f60;
+  --color-bg-effect: rgb(229 222 204 / 10%);
+  --blendmode-effect: none;
+  --bg-blur: 5px;
+  --font-size-list-item: clamp(1rem, 4vw, 2rem);
+}
+
+.demo-4::after {
+  display: none;
+}
+
 body {
   margin: 0;
   color: var(--color-text);
@@ -125,7 +143,7 @@ a:focus-visible {
   color: #e3b774;
   padding: var(--page-padding);
   display: grid;
-  z-index: 1000;
+  z-index: 10000;
   grid-row-gap: 1rem;
   grid-column-gap: 2rem;
   pointer-events: none;
@@ -134,46 +152,7 @@ a:focus-visible {
   top: 0;
   left: 0;
   width: 100%;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto auto;
-  grid-template-areas: 'title' 'sponsor';
   transition: opacity 0.3s;
-}
-
-.hidden {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.frame #cdawrap {
-  justify-self: end;
-  max-width: 300px;
-  text-align: right;
-}
-
-.frame a {
-  pointer-events: auto;
-  color: #fff;
-}
-
-.frame a:focus,
-.frame a:hover {
-  color: #fff;
-}
-
-.frame__title {
-  grid-area: title;
-  font-size: 1.25rem;
-  margin: 0;
-  font-weight: 400;
-  font-family:
-    'new-science',
-    -apple-system,
-    BlinkMacSystemFont,
-    Segoe UI,
-    Helvetica,
-    Arial,
-    sans-serif;
 }
 
 .intro {
@@ -194,8 +173,9 @@ a:focus-visible {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url(../../public/img/noise.png),
-    radial-gradient(circle, #f9a13275 0%, transparent 50%);
+  /* background: url(../../public/img/noise.png),
+    radial-gradient(circle, #f9a13275 0%, transparent 50%); */
+  background-image: repeating-linear-gradient(transparent, transparent 2px, #0000003d 3px);
   background-size: 250px, 100%;
   pointer-events: none;
 }
@@ -274,7 +254,7 @@ a:focus-visible {
   font-weight: 700;
   font-size: 1.15rem;
   background: url(../../public/img/noise.png),
-    radial-gradient(circle, #f9a13275 0%, transparent 100%);
+    radial-gradient(circle, rgba(249, 161, 50, 0.459) 0%, transparent 100%);
   background-size: 250px, 100%;
   transition: all 0.3s;
   cursor: pointer;

@@ -1,11 +1,12 @@
 import type { Config } from 'tailwindcss'
+import defaultTheme from 'tailwindcss/defaultTheme'
 
 import svgToDataUri from 'mini-svg-data-uri'
 
-import colors from 'tailwindcss/colors'
 import { default as flattenColorPalette } from 'tailwindcss/lib/util/flattenColorPalette'
 
 const config = {
+  mode: 'jit',
   darkMode: ['class'],
   content: [
     './pages/**/*.{ts,tsx}',
@@ -16,6 +17,10 @@ const config = {
   ],
   prefix: '',
   theme: {
+    fontSize: {
+      ...defaultTheme.fontSize,
+      '9xl': '16rem',
+    },
     container: {
       center: true,
       padding: '2rem',
@@ -25,6 +30,7 @@ const config = {
     },
     extend: {
       colors: {
+        brand: '#e3b774',
         sunflower: {
           '50': '#fdfee8',
           '100': '#fafec3',
@@ -86,11 +92,6 @@ const config = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
-      },
-      borderRadius: {
-        lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
       },
       keyframes: {
         aurora: {

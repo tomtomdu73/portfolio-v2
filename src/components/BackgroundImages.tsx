@@ -11,7 +11,7 @@ const getRandomImage = (num, exclude) => {
 const generateRows = (numRows, numItems, numImages) => {
   let previousRowImages = []
 
-  return Array.from({ length: numRows }, () => {
+  return Array.from({ length: numRows }, (item, index) => {
     let currentRowImages = []
 
     for (let i = 0; i < numItems; i++) {
@@ -22,7 +22,7 @@ const generateRows = (numRows, numItems, numImages) => {
     previousRowImages = currentRowImages
 
     return (
-      <div className="row">
+      <div className="row" key={index}>
         {currentRowImages.map((imageNum, index) => (
           <div className="row__item" key={index}>
             <div className="row__item-inner">

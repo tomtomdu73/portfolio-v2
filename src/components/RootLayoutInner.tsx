@@ -1,34 +1,41 @@
 'use client'
 
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
-
 import Flip from 'gsap/Flip'
-import { getMousePos, lerp } from '@/utils/motion.js'
+
 import BackgroundImages from '@/components/BackgroundImages'
+import { getMousePos, lerp } from '@/utils/motion'
 
 gsap.registerPlugin(Flip)
 
-const TestPage = () => {
+const gridConfig = {
+  translateX: true,
+  skewX: false,
+  contrast: true,
+  scale: false,
+  brightness: true,
+}
+
+export function RootLayoutInner({ children }: { children: React.ReactNode }) {
   const frameRef = useRef(null)
   const contentRef = useRef(null)
   const enterButtonRef = useRef(null)
   const fullviewRef = useRef(null)
   const gridRef = useRef(null)
 
-  const [winsize, setWinsize] = useState({ width: window.innerWidth, height: window.innerHeight })
-  const [mousepos, setMousepos] = useState({ x: window.innerWidth / 2, y: window.innerHeight / 2 })
-  const [renderedStyles, setRenderedStyles] = useState([])
+  const [winsize, setWinsize] = useState<{ width: number; height: number }>({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  })
+  const [mousepos, setMousepos] = useState<{ x: number; y: number }>({
+    x: window.innerWidth / 2,
+    y: window.innerHeight / 2,
+  })
+  const [renderedStyles, setRenderedStyles] = useState<RenderedStyleProps[]>([])
   const [requestId, setRequestId] = useState<number | null>(null)
 
-  const config = {
-    translateX: true,
-    skewX: false,
-    contrast: true,
-    scale: false,
-    brightness: true,
-  }
-
+  /* Update cursor position and window size */
   useEffect(() => {
     const handleResize = () => {
       setWinsize({ width: window.innerWidth, height: window.innerHeight })
@@ -55,6 +62,7 @@ const TestPage = () => {
     }
   }, [])
 
+  /* Init rendered style */
   useEffect(() => {
     const gridRows = gridRef.current.querySelectorAll('.row')
     const numRows = gridRows.length
@@ -70,35 +78,27 @@ const TestPage = () => {
 
     const baseAmt = 0.1
     const minAmt = 0.05
-    const maxAmt = 0.1
-
-    const config = {
-      translateX: true,
-      skewX: false,
-      contrast: true,
-      scale: false,
-      brightness: true,
-    }
+    const maxAmt = 0.5
 
     const newRenderedStyles = Array.from({ length: numRows }, (v, index) => {
       const distanceFromMiddle = Math.abs(index - middleRowIndex)
       const amt = Math.max(baseAmt - distanceFromMiddle * 0.03, minAmt)
       const scaleAmt = Math.min(baseAmt + distanceFromMiddle * 0.03, maxAmt)
-      let style = {}
+      let style = {} as RenderedStyleProps
 
-      if (config.translateX) {
+      if (gridConfig.translateX) {
         style.translateX = { previous: 0, current: 0 }
       }
-      if (config.skewX) {
+      if (gridConfig.skewX) {
         style.skewX = { previous: 0, current: 0 }
       }
-      if (config.contrast) {
+      if (gridConfig.contrast) {
         style.contrast = { previous: 100, current: 100 }
       }
-      if (config.scale) {
+      if (gridConfig.scale) {
         style.scale = { previous: 1, current: 1 }
       }
-      if (config.brightness) {
+      if (gridConfig.brightness) {
         style.brightness = { previous: 100, current: 100 }
       }
 
@@ -108,10 +108,10 @@ const TestPage = () => {
         scaleAmt,
       }
     })
-    console.log('initialRenderedStyle', newRenderedStyles)
     setRenderedStyles(newRenderedStyles)
   }, [])
 
+  /* Animate background images */
   useEffect(() => {
     const calculateMappedX = () => {
       return (((mousepos.x / winsize.width) * 2 - 1) * 40 * winsize.width) / 100
@@ -155,22 +155,23 @@ const TestPage = () => {
       }
 
       const gridRows = gridRef.current.querySelectorAll('.row')
+
       gridRows.forEach((row, index) => {
         const style = renderedStyles[index]
-        for (let prop in config) {
-          if (config[prop]) {
+        for (let prop in gridConfig) {
+          if (gridConfig[prop]) {
             style[prop].current = mappedValues[prop]
             const amt = prop === 'scale' ? style.scaleAmt : style.amt
             style[prop].previous = lerp(style[prop].previous, style[prop].current, amt)
           }
         }
 
-        let gsapSettings = {}
-        if (config.translateX) gsapSettings.x = style.translateX.previous
-        if (config.skewX) gsapSettings.skewX = style.skewX.previous
-        if (config.scale) gsapSettings.scale = style.scale.previous
-        if (config.contrast) gsapSettings.filter = `contrast(${style.contrast.previous}%)`
-        if (config.brightness)
+        let gsapSettings = {} as GsapSettingProps
+        if (gridConfig.translateX) gsapSettings.x = style.translateX.previous
+        if (gridConfig.skewX) gsapSettings.skewX = style.skewX.previous
+        if (gridConfig.scale) gsapSettings.scale = style.scale.previous
+        if (gridConfig.contrast) gsapSettings.filter = `contrast(${style.contrast.previous}%)`
+        if (gridConfig.brightness)
           gsapSettings.filter = `${gsapSettings.filter ? gsapSettings.filter + ' ' : ''}brightness(${style.brightness.previous}%)`
 
         gsap.set(row, gsapSettings)
@@ -197,6 +198,7 @@ const TestPage = () => {
     return () => stopRendering()
   }, [winsize, mousepos, renderedStyles, requestId])
 
+  /* Transition to fullview */
   const enterFullview = () => {
     const gridRows = gridRef.current.querySelectorAll('.row')
     const numRows = gridRows.length
@@ -266,9 +268,9 @@ const TestPage = () => {
 
   return (
     <div className="noscroll loading" ref={frameRef}>
-      <header className="frame">
-        <h1 className="frame__title">
-          Thomas <strong>COSIALLS</strong>
+      <header className="absolute z-[100] m-4 cursor-pointer rounded-xl bg-black-100 p-8 text-xl text-brand">
+        <h1 onClick={() => location.reload()}>
+          <strong>Thomas COSIALLS</strong> | Portfolio
         </h1>
       </header>
       <section className="intro">
@@ -276,72 +278,19 @@ const TestPage = () => {
           <BackgroundImages />
         </div>
         <div className="fullview" ref={fullviewRef}></div>
-        <div className="enter !text-white" ref={enterButtonRef} onClick={enterFullview}>
-          <span>Enter my portfolio</span>
+        <div
+          className="absolute z-[100] cursor-pointer"
+          ref={enterButtonRef}
+          onClick={enterFullview}
+        >
+          <button className="rounded-xl bg-black-100 p-5 text-xl font-bold uppercase text-white ring-brand transition-all duration-200 ease-in-out hover:text-brand">
+            Enter
+          </button>
         </div>
       </section>
       <section className="content" ref={contentRef}>
-        <nav className="content__nav">
-          <a
-            className="content__nav-item"
-            href="https://tympanus.net/codrops/?p=77934"
-            target="_blank"
-          >
-            LINKEDIN
-          </a>
-          <a
-            className="content__nav-item"
-            href="https://github.com/codrops/IntroGridMotionTransition"
-            target="_blank"
-          >
-            GitHub
-          </a>
-          <a
-            className="content__nav-item"
-            href="https://github.com/codrops/IntroGridMotionTransition"
-            target="_blank"
-          >
-            AGENCY
-          </a>
-          <a className="content__nav-item" href="https://tympanus.net/codrops/demos/">
-            Explore all demos &rarr;
-          </a>
-        </nav>
-        <div className="content__header">
-          <h2>Welcome</h2>
-        </div>
-        <div className="content__text">
-          <p className="right">
-            At <strong>Nova</strong>Motion&reg;, our team of creative artists and tech experts work
-            together to explore new possibilities. Each project shows our dedication to new ideas
-            and high quality, whether it's a commercial, film, or interactive display.
-          </p>
-          <p className="highlight">
-            We believe motion design can tell stories, evoke emotions, and inspire imaginations.
-          </p>
-          <p>
-            Our clients are at the core of everything we do at <strong>Nova</strong>Motion&reg;. We
-            pride ourselves on building strong, lasting relationships based on trust, communication,
-            and mutual respect. We listen carefully to your needs and goals, ensuring we fully
-            understand your vision.{' '}
-          </p>
-          <p>
-            By collaborating closely, we tailor our approach to meet your unique requirements,
-            delivering results that exceed expectations. Whether you are a small business or a large
-            corporation, we are committed to helping you succeed. With <strong>Nova</strong>
-            Motion&reg;, you are not just a client; you are a valued partner in creating exceptional
-            visual stories.
-          </p>
-        </div>
-        <footer className="content__footer">
-          <span>
-            Made by <a href="https://www.instagram.com/codropsss/">@codrops</a>
-          </span>
-          <a href="https://tympanus.net/codrops/collective/">Subscribe to our frontend news</a>
-        </footer>
+        {children}
       </section>
     </div>
   )
 }
-
-export default TestPage

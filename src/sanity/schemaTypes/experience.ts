@@ -12,28 +12,21 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'description',
+      title: 'Description',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: 'company',
       title: 'Company',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'companyUrl',
+      name: 'externalUrl',
+      title: 'External Url',
       type: 'url',
-      title: 'company url',
-    }),
-    defineField({
-      name: 'description',
-      title: 'Description',
-      type: 'array',
-      of: [
-        {
-          title: 'Block',
-          type: 'block',
-          styles: [{ title: 'Normal', value: 'normal' }],
-          lists: [],
-        },
-      ],
     }),
     defineField({
       name: 'location',

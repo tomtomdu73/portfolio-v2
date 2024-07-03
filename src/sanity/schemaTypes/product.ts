@@ -15,7 +15,13 @@ export default defineType({
       name: 'description',
       title: 'Description',
       type: 'string',
-      validation: (Rule) => Rule.required().min(50).max(155),
+      validation: (Rule) => Rule.required().max(155),
+    }),
+    defineField({
+      name: 'externalUrl',
+      title: 'External Url',
+      type: 'url',
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'image',
@@ -31,13 +37,11 @@ export default defineType({
           title: 'project image',
         },
       ],
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'videoUrl',
       type: 'url',
       title: 'YouTube video URL',
-      validation: (Rule) => Rule.required(),
     }),
   ],
 })

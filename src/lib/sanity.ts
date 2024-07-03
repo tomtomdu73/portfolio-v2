@@ -10,41 +10,39 @@ export interface Testimonial {
   review: PortableTextBlock[]
 }
 
-export interface ProductType {
+export interface BaseEntryType {
   id: string
-  name: string
-  bio: string
+  title: string
+  description: string
+  externalUrl?: string
+  videoUrl?: string
+  endDate?: string
+}
+
+export interface ProductType extends BaseEntryType {
   review: PortableTextBlock[]
 }
 
-export interface ExperienceType {
-  id: string
-  title: string
+export interface ExperienceType extends BaseEntryType {
   company: string
-  companyUrl?: string
-  description: PortableTextBlock[]
   startDate: string
-  endDate?: string
   location: string
   stacks: string[]
   logo: Image
 }
 
-export interface ClientType {
-  id: string
-  title: string
-  description: string
+export interface ClientType extends BaseEntryType {
   logo: Image
   stacks: string[]
-  endDate: string
 }
 
 export async function getTestimonials(): Promise<Testimonial[]> {
   return client.fetch<Testimonial[]>(
     groq`*[_type == "testimony"] {
-          "id": _id,
-          name,
-          bio,
+        "id": _id,
+        title,
+        description,
+        externalUrl,
         review[]{
             ...,
             markDefs[]{
@@ -61,6 +59,7 @@ export async function getProducts(): Promise<ProductType[]> {
           "id": _id,
           title,
           description,
+          externalUrl,
           videoUrl,
           image
     }`
@@ -71,16 +70,11 @@ export async function getExperiences(): Promise<ExperienceType[]> {
     groq`*[_type == "experience"] {
           "id": _id,
           title,
+          description,
+          externalUrl,
           company,
-          companyUrl,
           logo,
           location,
-          description[]{
-              ...,
-              markDefs[]{
-                  ...
-              }
-          },
           startDate,
           endDate,
           stacks,
@@ -89,10 +83,11 @@ export async function getExperiences(): Promise<ExperienceType[]> {
 }
 export async function getClients(): Promise<ClientType[]> {
   return client.fetch<ClientType[]>(
-    groq`*[_type == "client"] {
+    groq`*[_type == "client"] | order(endDate desc){
           "id": _id,
           title,
           description,
+          externalUrl,
           logo,
           stacks,
           endDate

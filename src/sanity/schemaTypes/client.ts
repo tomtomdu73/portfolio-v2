@@ -24,9 +24,9 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'projectUrl',
+      name: 'externalUrl',
+      title: 'External url',
       type: 'url',
-      title: 'Project url',
       validation: (Rule) => Rule.required(),
     }),
     defineField({

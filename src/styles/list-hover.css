@@ -1,54 +1,18 @@
 :root {
   --color-bg-effect: rgba(229, 222, 204, 0.3);
-}
-
-.demo-4::after {
-  display: none;
-}
-
-.animated-list-section {
-  position: relative;
-  height: 100%;
-  width: 100%;
-  z-index: 100;
-}
-
-.list {
-  z-index: 1000;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  counter-reset: item 0;
+  /* --color-bg-effect: rgba(229, 178, 49, 0.3); */
 }
 
 .list__item {
-  font-size: 3rem;
-  cursor: pointer;
-  width: 100%;
-  display: grid;
+  font-size: 1rem;
   color: var(--color-list-item);
-  grid-column-gap: 2rem;
-  padding: 0.5rem 0;
-  grid-template-columns: 100%;
-  justify-content: space-between;
-  align-items: start;
-  justify-items: start;
+  padding: 3px 3px 0;
+  font-weight: 500;
+  z-index: 100;
 }
 
 .demo-4 .list__item {
   padding: 0.85rem 0;
-}
-
-.list__item::before {
-  color: var(--color-number);
-  content: counter(item, decimal-leading-zero);
-  counter-increment: item;
-  font-weight: 500;
-  padding: 3px 3px 0;
-  line-height: 0.8;
 }
 
 .demo-4 .list__item::before {
@@ -57,12 +21,6 @@
 
 .list--alt .list__item::before {
   content: 'EVT#' counter(item, decimal-leading-zero) '0';
-}
-
-.list__item-col {
-  flex: none;
-  padding: 3px 3px 0;
-  line-height: 0.8;
 }
 
 .hover-effect .word {

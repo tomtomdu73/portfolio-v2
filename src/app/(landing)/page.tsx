@@ -1,27 +1,37 @@
 import ExternalLink from '@/components/ui/ExternalLink'
-import Projects from '@/components/Projects'
 import Clients from '@/components/Clients'
-import Experience from '@/components/Experience'
+import Products from '@/components/Products'
+import Experiences from '@/components/Experience'
 
-const Home = () => {
+function NavBar() {
   return (
-    <>
-      <nav className="flex justify-center gap-40 text-xl">
-        <ExternalLink title="LinkedIn" />
-        <ExternalLink title="Github" />
-        <ExternalLink title="Work with me" />
-      </nav>
-      <div className="justify-left flex items-center gap-10">
-        <h2 className="text-9xl font-medium">Welcome</h2>
-        <p className="w-80 text-justify text-2xl leading-8">
-          I am <strong>Thomas Cosialls</strong>, a french sofware engineer and world citizen. I am
-          passionate about learning, discovering and building new things. I am always looking for
-          new challenges and opportunities to grow.
+    <nav className="text-md my-5 flex justify-center gap-4 sm:my-0 sm:gap-40 sm:text-xl">
+      <ExternalLink title="LinkedIn" url={process.env.NEXT_PUBLIC_LINKEDIN_URL} />
+      <ExternalLink title="Github" url={process.env.NEXT_PUBLIC_GITHUB_URL} />
+      <ExternalLink title="Work with me" url={process.env.NEXT_PUBLIC_AGENCY_URL} />
+    </nav>
+  )
+}
+
+export default function Home() {
+  return (
+    <div className="mx-10">
+      <NavBar />
+
+      <div className="my-20 flex flex-col items-center justify-center gap-10 sm:flex-row">
+        <h2 className="text-8xl font-medium sm:text-9xl">Welcome</h2>
+        <p className="w-full text-pretty text-justify text-2xl leading-9 tracking-wide sm:w-[500px]">
+          I am <strong>Thomas Cosialls</strong>, a french <strong>full-stack engineer</strong> and
+          world citizen. I am passionate about learning, discovering, connecting with people and
+          building things. I am always looking for new challenges, with a strong focus on the{' '}
+          <strong>blockchain and web3</strong> spaces.
         </p>
       </div>
+
       <Clients />
-      {/* <Projects /> */}
-      {/* <Experience /> */}
+      <Products />
+      <Experiences />
+      {/* 
       <div className="content__text">
         <p className="right">
           At <strong>Nova</strong>Motion&reg;, our team of creative artists and tech experts work
@@ -44,15 +54,11 @@ const Home = () => {
           Motion&reg;, you are not just a client; you are a valued partner in creating exceptional
           visual stories.
         </p>
-      </div>
+      </div> */}
       <footer className="content__footer">
-        <span>
-          Made by <a href="https://www.instagram.com/codropsss/">@codrops</a>
-        </span>
-        <a href="https://tympanus.net/codrops/collective/">Subscribe to our frontend news</a>
+        <span>Made by Thomas Cosialls</span>
+        <a href="https://tympanus.net/codrops/collective/">Animation inspired by Codrops</a>
       </footer>
-    </>
+    </div>
   )
 }
-
-export default Home

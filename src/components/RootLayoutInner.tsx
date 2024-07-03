@@ -283,8 +283,8 @@ export function RootLayoutInner({ children }: { children: React.ReactNode }) {
           ref={enterButtonRef}
           onClick={enterFullview}
         >
-          <button className="rounded-xl bg-black-100 p-5 text-xl font-bold uppercase text-white ring-brand transition-all duration-200 ease-in-out hover:text-brand">
-            Enter
+          <button className="rounded-xl bg-brand p-5 text-xl font-bold uppercase text-black-100 ring-brand transition-all duration-200 ease-in-out hover:bg-black-100 hover:text-white">
+            Click to enter
           </button>
         </div>
       </section>

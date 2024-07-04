@@ -6,6 +6,7 @@ import Flip from 'gsap/Flip'
 
 import BackgroundImages from '@/components/BackgroundImages'
 import { getMousePos, lerp } from '@/utils/motion'
+import CustomCursor from './CustomCursor'
 
 gsap.registerPlugin(Flip)
 
@@ -266,30 +267,33 @@ export function RootLayoutInner({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="noscroll loading" ref={frameRef}>
-      <header className="absolute z-[100] m-4 cursor-pointer rounded-xl bg-black-100 p-8 text-xl text-brand">
-        <h1 onClick={() => location.reload()}>
-          <strong>Thomas COSIALLS</strong> | Portfolio
-        </h1>
-      </header>
-      <section className="intro">
-        <div className="grid" ref={gridRef}>
-          <BackgroundImages />
-        </div>
-        <div className="fullview" ref={fullviewRef}></div>
-        <div
-          className="absolute z-[100] cursor-pointer"
-          ref={enterButtonRef}
-          onClick={enterFullview}
-        >
-          <button className="rounded-xl bg-brand p-5 text-xl font-bold uppercase text-black-100 ring-brand transition-all duration-200 ease-in-out hover:bg-black-100 hover:text-white">
-            Click to enter
-          </button>
-        </div>
-      </section>
-      <section className="content" ref={contentRef}>
-        {children}
-      </section>
-    </div>
+    <>
+      <CustomCursor />
+      <div className="noscroll loading" ref={frameRef}>
+        <header className="absolute z-[100] m-4 cursor-pointer rounded-xl bg-black-100 p-8 text-xl text-brand">
+          <h1 onClick={() => location.reload()}>
+            <strong>Thomas COSIALLS</strong> | Portfolio
+          </h1>
+        </header>
+        <section className="intro">
+          <div className="grid" ref={gridRef}>
+            <BackgroundImages />
+          </div>
+          <div className="fullview" ref={fullviewRef}></div>
+          <div
+            className="absolute z-[100] cursor-pointer"
+            ref={enterButtonRef}
+            onClick={enterFullview}
+          >
+            <button className="rounded-xl bg-brand p-5 text-xl font-bold uppercase text-black-100 ring-brand transition-all duration-200 ease-in-out hover:bg-black-100 hover:text-white">
+              Click to enter
+            </button>
+          </div>
+        </section>
+        <section className="content" ref={contentRef}>
+          {children}
+        </section>
+      </div>
+    </>
   )
 }

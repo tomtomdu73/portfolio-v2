@@ -3,65 +3,42 @@ import { Image } from 'sanity'
 
 import { client } from '@/sanity/lib/client'
 
-export interface Testimonial {
-  id: string
-  name: string
-  bio: string
-  review: PortableTextBlock[]
-}
-
 export interface BaseEntryType {
   id: string
   title: string
   description: string
   externalUrl?: string
   videoUrl?: string
+  startDate?: string
   endDate?: string
+  company?: string
+  location?: string
 }
 
 export interface ProductType extends BaseEntryType {
-  review: PortableTextBlock[]
+  image?: Image
 }
 
 export interface ExperienceType extends BaseEntryType {
-  company: string
-  startDate: string
-  location: string
   stacks: string[]
   logo: Image
 }
 
 export interface ClientType extends BaseEntryType {
-  logo: Image
   stacks: string[]
-}
-
-export async function getTestimonials(): Promise<Testimonial[]> {
-  return client.fetch<Testimonial[]>(
-    groq`*[_type == "testimony"] {
-        "id": _id,
-        title,
-        description,
-        externalUrl,
-        review[]{
-            ...,
-            markDefs[]{
-                ...
-            }
-        },
-    }`
-  )
+  logo: Image
 }
 
 export async function getProducts(): Promise<ProductType[]> {
   return client.fetch<ProductType[]>(
-    groq`*[_type == "product"] {
+    groq`*[_type == "product"] | order(startDate desc) {
           "id": _id,
           title,
           description,
           externalUrl,
           videoUrl,
-          image
+          image,
+          startDate
     }`
   )
 }

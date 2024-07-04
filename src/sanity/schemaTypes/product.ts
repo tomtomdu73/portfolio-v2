@@ -15,12 +15,18 @@ export default defineType({
       name: 'description',
       title: 'Description',
       type: 'string',
-      validation: (Rule) => Rule.required().max(155),
+      validation: (Rule) => Rule.required().max(55),
     }),
     defineField({
       name: 'externalUrl',
       title: 'External Url',
       type: 'url',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'startDate',
+      title: 'Start date',
+      type: 'datetime',
       validation: (Rule) => Rule.required(),
     }),
     defineField({

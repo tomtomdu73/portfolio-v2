@@ -15,7 +15,7 @@ export default defineType({
       name: 'description',
       title: 'Description',
       type: 'string',
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) => Rule.required().max(55),
     }),
     defineField({
       name: 'company',
@@ -59,7 +59,6 @@ export default defineType({
           title: 'project logo',
         },
       ],
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'stacks',

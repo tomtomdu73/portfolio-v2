@@ -15,7 +15,7 @@ export default defineType({
       name: 'description',
       title: 'Description',
       type: 'string',
-      validation: (Rule) => Rule.required().max(300),
+      validation: (Rule) => Rule.required().max(55),
     }),
     defineField({
       name: 'endDate',

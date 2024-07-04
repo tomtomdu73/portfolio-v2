@@ -12,12 +12,18 @@ export interface AnimatedListProps {
   items: BaseEntryType[]
   withVideo?: boolean
   withDate?: boolean
+  isExperience?: boolean
+}
+
+function Separator({ variant = 'small' }: { variant?: 'small' | 'large' }) {
+  return <span className={`${variant == 'small' ? 'text-2xl' : 'text-4xl'} font-light`}>|</span>
 }
 
 export default function AnimatedList({
   items,
   withVideo = false,
   withDate = false,
+  isExperience = false,
 }: AnimatedListProps) {
   const [selectedVideo, setSelectedVideo] = React.useState<string | null>(null)
 
@@ -87,7 +93,7 @@ export default function AnimatedList({
       <ul className="flex list-none flex-col justify-center gap-8 sm:gap-4">
         {items.map((item) => (
           <li
-            className="group z-50 flex flex-col items-center justify-center gap-4 sm:flex-row sm:justify-end"
+            className="group z-50 flex flex-col items-center justify-center gap-2 sm:flex-row sm:justify-end"
             ref={(el) => el && listItemRefs.current.push(el)}
             key={item.id}
           >
@@ -95,17 +101,44 @@ export default function AnimatedList({
               {item.title}
             </span>
 
-            {withDate && <span className="text-2xl font-light">{moment(item.endDate).year()}</span>}
-            <span className="text-center text-3xl sm:text-right">{item.description}</span>
+            {withDate && (
+              <>
+                <Separator />
+
+                <span className="text-3xl font-light">
+                  {item.startDate && moment(item.startDate).format('YYYY') + ' - '}
+                  {item.endDate && moment(item.endDate).format('YYYY')}
+                </span>
+              </>
+            )}
+            <Separator />
+            {isExperience ? (
+              <>
+                <span className="text-center text-3xl sm:text-right">{item.company}</span>
+                <Separator />
+                <span className="text-center text-3xl sm:text-right">{item.location}</span>
+              </>
+            ) : (
+              <span className="text-center text-3xl sm:text-right">{item.description}</span>
+            )}
+
             {item.externalUrl && (
-              <nav className="my-4 flex justify-center text-xl group-hover:animate-bounce">
-                <ExternalLink title="Visit" url={item.externalUrl} />
-              </nav>
+              <>
+                <Separator />
+                <nav className="my-4 flex justify-center text-xl group-hover:animate-bounce">
+                  <ExternalLink title="Visit" url={item.externalUrl} />
+                </nav>
+              </>
             )}
             {withVideo && (
-              <button onClick={() => setSelectedVideo('https://www.youtube.com/embed/tgbNymZ7vqY')}>
-                Play
-              </button>
+              <>
+                <Separator />
+                <button
+                  onClick={() => setSelectedVideo('https://www.youtube.com/embed/tgbNymZ7vqY')}
+                >
+                  Play
+                </button>
+              </>
             )}
           </li>
         ))}

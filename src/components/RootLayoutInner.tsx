@@ -74,7 +74,7 @@ export function RootLayoutInner({ children }: { children: React.ReactNode }) {
     const middleRowItemIndex = Math.floor(numRowItems / 2)
     const middleRowItemInner = middleRowItems[middleRowItemIndex].querySelector('.row__item-inner')
     const middleRowItemInnerImage = middleRowItemInner.querySelector('.row__item-img')
-    middleRowItemInnerImage.classList.add('row__item-img--large')
+    // middleRowItemInnerImage.classList.add('row__item-img--large')
 
     const baseAmt = 0.1
     const minAmt = 0.05

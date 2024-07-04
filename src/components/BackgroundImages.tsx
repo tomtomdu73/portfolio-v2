@@ -1,4 +1,4 @@
-import React from 'react'
+import Image from 'next/image'
 
 const getRandomImage = (num, exclude) => {
   let randomNum
@@ -26,10 +26,17 @@ const generateRows = (numRows, numItems, numImages) => {
         {currentRowImages.map((imageNum, index) => (
           <div className="row__item" key={index}>
             <div className="row__item-inner">
-              <div
+              <Image
+                width={1400}
+                height={1000}
+                src={`/img/${imageNum}.jpg`}
+                alt="image"
+                className="row__item-img grayscale"
+              />
+              {/* <div
                 className="row__item-img grayscale"
                 style={{ backgroundImage: `url(img/${imageNum}.jpg)` }}
-              ></div>
+              ></div> */}
             </div>
           </div>
         ))}

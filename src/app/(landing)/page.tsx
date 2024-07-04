@@ -21,8 +21,8 @@ export default function Home() {
       <div className="my-20 flex flex-col items-center justify-center gap-10 sm:flex-row">
         <h2 className="text-8xl font-medium sm:text-9xl">Welcome</h2>
         <p className="w-full text-pretty text-justify text-2xl leading-9 tracking-wide sm:w-[500px]">
-          I am <strong>Thomas Cosialls</strong>, a french <strong>full-stack engineer</strong> and
-          world citizen. I am passionate about learning, discovering, connecting with people and
+          Hi, I am <strong>Thomas Cosialls</strong>, a french <strong>full-stack engineer</strong>{' '}
+          and world citizen. I am passionate about learning, discovering, connecting with people and
           building things. I am always looking for new challenges, with a strong focus on the{' '}
           <strong>blockchain and web3</strong> spaces.
         </p>
@@ -57,7 +57,7 @@ export default function Home() {
       </div> */}
       <footer className="content__footer">
         <span>Made by Thomas Cosialls</span>
-        <a href="https://tympanus.net/codrops/collective/">Animation inspired by Codrops</a>
+        <ExternalLink title="Animation inspired by Codrops" url="https://tympanus.net/codrops/" />
       </footer>
     </div>
   )

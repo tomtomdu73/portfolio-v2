@@ -28,9 +28,11 @@ const generateRows = (numRows, numItems, numImages) => {
             <div className="row__item-inner">
               <Image
                 width={1400}
-                height={1000}
+                height={1100}
                 src={`/img/${imageNum}.jpg`}
                 alt="image"
+                placeholder="blur"
+                blurDataURL={`/img/blur.jpg`}
                 className="row__item-img grayscale"
               />
               {/* <div

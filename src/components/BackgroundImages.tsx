@@ -34,6 +34,7 @@ const generateRows = (numRows, numItems, numImages) => {
                 placeholder="blur"
                 blurDataURL={`/img/blur.jpg`}
                 className="row__item-img grayscale"
+                priority
               />
               {/* <div
                 className="row__item-img grayscale"

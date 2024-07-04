@@ -24,16 +24,15 @@ export function RootLayoutInner({ children }: { children: React.ReactNode }) {
   const fullviewRef = useRef(null)
   const gridRef = useRef(null)
 
-  const [winsize, setWinsize] = useState<{ width: number; height: number }>({
-    width: window.innerWidth,
-    height: window.innerHeight,
-  })
-  const [mousepos, setMousepos] = useState<{ x: number; y: number }>({
-    x: window.innerWidth / 2,
-    y: window.innerHeight / 2,
-  })
+  const [winsize, setWinsize] = useState<{ width: number; height: number }>()
+  const [mousepos, setMousepos] = useState<{ x: number; y: number }>()
   const [renderedStyles, setRenderedStyles] = useState<RenderedStyleProps[]>([])
   const [requestId, setRequestId] = useState<number | null>(null)
+
+  useEffect(() => {
+    setWinsize({ width: window.innerWidth, height: window.innerHeight })
+    setMousepos({ x: window.innerWidth / 2, y: window.innerHeight / 2 })
+  }, [])
 
   /* Update cursor position and window size */
   useEffect(() => {

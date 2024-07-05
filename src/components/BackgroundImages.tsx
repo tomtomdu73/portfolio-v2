@@ -32,7 +32,7 @@ const generateRows = (numRows, numItems, numImages) => {
                 src={`/img/${imageNum}.jpg`}
                 alt="image"
                 placeholder="blur"
-                blurDataURL={`/img/blur.jpg`}
+                blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAACCAIAAADwyuo0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAI0lEQVR4nGNIqp9/7u3/C+//H3n8n0HLJTGvex2TaTSDkCkAzhoM7i3oidcAAAAASUVORK5CYII="
                 className="row__item-img grayscale"
                 priority
               />

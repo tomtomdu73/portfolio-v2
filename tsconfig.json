@@ -18,18 +18,10 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"],
-      "*": ["./src/types/*.d.ts"]
+      "@/*": ["./src/*"]
     },
     "target": "ES2017"
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    "src/components/text-animator.js",
-    "src/components/text-splitter..js"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }

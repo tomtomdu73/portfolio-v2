@@ -1,3 +1,4 @@
 User-Agent: *
 Allow: /
+Disallow: /studio/
 Sitemap: https://cosialls.fr/sitemap.xml

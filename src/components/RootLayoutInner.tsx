@@ -181,7 +181,12 @@ export function RootLayoutInner({ children }: { children: React.ReactNode }) {
     }
 
     const startRendering = () => {
-      if (!requestId && gridRef.current && renderedStyles.length > 0) {
+      if (
+        !requestId &&
+        gridRef.current &&
+        renderedStyles.length > 0 &&
+        !enterButtonRef.current.classList.contains('hidden')
+      ) {
         render()
       }
     }
@@ -196,7 +201,7 @@ export function RootLayoutInner({ children }: { children: React.ReactNode }) {
     startRendering()
 
     return () => stopRendering()
-  }, [winsize, mousepos, renderedStyles, requestId])
+  }, [winsize, requestId])
 
   /* Transition to fullview */
   const enterFullview = () => {

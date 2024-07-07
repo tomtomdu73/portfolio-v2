@@ -78,7 +78,7 @@ export default function AnimatedList({
   }, [])
 
   return (
-    <section className="my-10">
+    <section className="my-20 font-mono">
       {withVideo && selectedVideo && (
         <iframe
           width="560"
@@ -90,14 +90,14 @@ export default function AnimatedList({
         ></iframe>
       )}
 
-      <ul className="flex list-none flex-col justify-center gap-8 sm:gap-4">
+      <ul className="flex list-none flex-col justify-center gap-14 xl:gap-4">
         {items.map((item) => (
           <li
-            className="group z-50 flex flex-col items-center justify-center gap-2 sm:flex-row sm:justify-end"
+            className="group z-50 flex flex-col items-center justify-center gap-2 xl:flex-row xl:justify-end"
             ref={(el) => el && listItemRefs.current.push(el)}
             key={item.id}
           >
-            <span className="list__item-col hover-effect hover-effect--bg-south text-wrap text-3xl font-medium sm:text-6xl">
+            <span className="list__item-col hover-effect hover-effect--bg-south text-wrap text-4xl font-medium xl:text-5xl 2xl:text-6xl">
               {item.title}
             </span>
 
@@ -105,7 +105,7 @@ export default function AnimatedList({
               <>
                 <Separator />
 
-                <span className="text-3xl font-light">
+                <span className="text-2xl font-light sm:text-3xl">
                   {item.startDate && moment(item.startDate).format('YYYY') + ' - '}
                   {item.endDate && moment(item.endDate).format('YYYY')}
                 </span>
@@ -114,18 +114,24 @@ export default function AnimatedList({
             <Separator />
             {isExperience ? (
               <>
-                <span className="text-center text-3xl sm:text-right">{item.company}</span>
+                <span className="text-center text-2xl xl:text-right 2xl:text-3xl">
+                  {item.company}
+                </span>
                 <Separator />
-                <span className="text-center text-3xl sm:text-right">{item.location}</span>
+                <span className="text-center text-2xl xl:text-right 2xl:text-3xl">
+                  {item.location}
+                </span>
               </>
             ) : (
-              <span className="text-center text-3xl sm:text-right">{item.description}</span>
+              <span className="text-center text-2xl xl:text-right 2xl:text-3xl">
+                {item.description}
+              </span>
             )}
 
             {item.externalUrl && (
               <>
                 <Separator />
-                <nav className="my-4 flex justify-center text-xl group-hover:animate-bounce">
+                <nav className="my-4 flex justify-center text-lg group-hover:animate-bounce sm:text-xl">
                   <ExternalLink title="Visit" url={item.externalUrl} />
                 </nav>
               </>

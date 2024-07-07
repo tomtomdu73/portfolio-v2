@@ -6,7 +6,7 @@ export default async function Products() {
 
   return (
     <section className="my-40">
-      <h3 className=" text-right text-5xl font-medium">#products</h3>
+      <h3 className="text-right font-mono text-5xl font-semibold">#products</h3>
       <AnimatedList items={products} />
     </section>
   )

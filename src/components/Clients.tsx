@@ -8,7 +8,7 @@ export default async function Clients() {
 
   return (
     <section className="my-40">
-      <h3 className="text-right text-5xl font-medium">#clients</h3>
+      <h3 className="text-right font-mono text-5xl font-semibold">#clients</h3>
       <AnimatedList items={clients} withDate />
     </section>
   )

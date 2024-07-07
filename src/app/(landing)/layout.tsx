@@ -1,11 +1,21 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { JetBrains_Mono, Inter } from 'next/font/google'
 
 import '@/styles/global.css'
 import { RootLayoutInner } from '@/components/RootLayoutInner'
 import GoogleAnalytics from '@/components/GoogleAnalytics'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+})
+
+const jetbrain = JetBrains_Mono({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-jetbrain',
+})
 
 export const metadata: Metadata = {
   title: 'Thomas Cosialls | Portfolio',
@@ -20,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.variable} ${jetbrain.variable} `}>
         <RootLayoutInner>{children}</RootLayoutInner>
       </body>
       <GoogleAnalytics />

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import AnimatedList from './AnimatedList'
+import AnimatedList from '@/components/ui/AnimatedList'
 import { ClientType, getClients } from '@/lib/sanity'
 
 export default async function Clients() {

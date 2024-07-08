@@ -6,7 +6,7 @@ import moment from 'moment'
 import '@/styles/list-hover.css'
 import { BaseEntryType } from '@/lib/sanity'
 import { TextAnimator } from '@/utils/text-animator'
-import ExternalLink from './ui/ExternalLink'
+import ExternalLink from '@/components/ui/ExternalLink'
 
 export interface AnimatedListProps {
   items: BaseEntryType[]

@@ -6,7 +6,7 @@ import Flip from 'gsap/Flip'
 
 import BackgroundImages from '@/components/BackgroundImages'
 import { getMousePos, lerp } from '@/utils/motion'
-import CustomCursor from './CustomCursor'
+import CustomCursor from '@/components/ui/CustomCursor'
 
 gsap.registerPlugin(Flip)
 

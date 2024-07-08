@@ -1,4 +1,4 @@
-import AnimatedList from './AnimatedList'
+import AnimatedList from '@/components/ui/AnimatedList'
 import { ExperienceType, getExperiences } from '@/lib/sanity'
 
 export default async function Experiences() {

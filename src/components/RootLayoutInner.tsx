@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import gsap from 'gsap'
 import Flip from 'gsap/Flip'
 
@@ -24,17 +24,15 @@ export function RootLayoutInner({ children }: { children: React.ReactNode }) {
   const enterButtonRef = useRef(null)
   const fullviewRef = useRef(null)
   const gridRef = useRef(null)
+  const requestIdRef = useRef<number | null>(null)
 
   const [winsize, setWinsize] = useState<{ width: number; height: number }>()
   const [mousepos, setMousepos] = useState<{ x: number; y: number }>()
   const [renderedStyles, setRenderedStyles] = useState<RenderedStyleProps[]>([])
-  const [requestId, setRequestId] = useState<number | null>(null)
-
-  const rows = useMemo(() => {
-    return generateRows(5, 7, 20)
-  }, [])
+  const [rows, setRows] = useState<React.ReactNode[]>([])
 
   useEffect(() => {
+    setRows(generateRows(5, 7, 20))
     setWinsize({ width: window.innerWidth, height: window.innerHeight })
     setMousepos({ x: window.innerWidth / 2, y: window.innerHeight / 2 })
   }, [])
@@ -68,11 +66,10 @@ export function RootLayoutInner({ children }: { children: React.ReactNode }) {
 
   /* Init rendered style */
   useEffect(() => {
-    if (!rows) return null
+    if (!gridRef.current || rows.length === 0) return
 
     const gridRows = gridRef.current.querySelectorAll('.row')
     const numRows = gridRows.length
-
     const middleRowIndex = Math.floor(numRows / 2)
     const middleRow = gridRows[middleRowIndex]
     const middleRowItems = middleRow.querySelectorAll('.row__item')
@@ -119,6 +116,8 @@ export function RootLayoutInner({ children }: { children: React.ReactNode }) {
 
   /* Animate background images */
   useEffect(() => {
+    if (!winsize?.width || !mousepos?.x || !gridRef.current || !renderedStyles.length) return
+
     const calculateMappedX = () => {
       return (((mousepos.x / winsize.width) * 2 - 1) * 40 * winsize.width) / 100
     }
@@ -183,31 +182,32 @@ export function RootLayoutInner({ children }: { children: React.ReactNode }) {
         gsap.set(row, gsapSettings)
       })
 
-      setRequestId(requestAnimationFrame(render))
+      requestIdRef.current = requestAnimationFrame(render)
     }
 
     const startRendering = () => {
       if (
-        !requestId &&
+        !requestIdRef.current &&
         gridRef.current &&
         renderedStyles.length > 0 &&
         !enterButtonRef.current.classList.contains('hidden')
       ) {
+        console.log('startRendering')
         render()
       }
     }
 
     const stopRendering = () => {
-      if (requestId) {
-        cancelAnimationFrame(requestId)
-        setRequestId(null)
+      if (requestIdRef.current) {
+        cancelAnimationFrame(requestIdRef.current)
+        requestIdRef.current = null
       }
     }
 
     startRendering()
 
     return () => stopRendering()
-  }, [winsize, requestId, rows])
+  }, [winsize, renderedStyles, mousepos])
 
   /* Transition to fullview */
   const enterFullview = () => {
@@ -234,7 +234,7 @@ export function RootLayoutInner({ children }: { children: React.ReactNode }) {
         duration: 0.9,
         ease: 'power4',
         absolute: true,
-        onComplete: () => setRequestId(null),
+        onComplete: () => (requestIdRef.current = null),
       })
     )
       .to(

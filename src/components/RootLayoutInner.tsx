@@ -192,7 +192,6 @@ export function RootLayoutInner({ children }: { children: React.ReactNode }) {
         renderedStyles.length > 0 &&
         !enterButtonRef.current.classList.contains('hidden')
       ) {
-        console.log('startRendering')
         render()
       }
     }

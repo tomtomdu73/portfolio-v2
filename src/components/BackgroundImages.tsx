@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { useEffect, useState } from 'react'
 
 const getRandomImage = (num, exclude) => {
   let randomNum
@@ -8,7 +9,7 @@ const getRandomImage = (num, exclude) => {
   return `url(img/${randomNum}.jpg)`
 }
 
-const generateRows = (numRows, numItems, numImages) => {
+export const generateRows = (numRows, numItems, numImages) => {
   let previousRowImages = []
 
   return Array.from({ length: numRows }, (item, index) => {
@@ -47,11 +48,3 @@ const generateRows = (numRows, numItems, numImages) => {
     )
   })
 }
-
-const rows = generateRows(5, 7, 20)
-
-const BackgroundImages = () => {
-  return rows
-}
-
-export default BackgroundImages

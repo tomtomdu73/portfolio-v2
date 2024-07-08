@@ -1,10 +1,10 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import gsap from 'gsap'
 import Flip from 'gsap/Flip'
 
-import BackgroundImages from '@/components/BackgroundImages'
+import { generateRows } from '@/components/BackgroundImages'
 import { getMousePos, lerp } from '@/utils/motion'
 import CustomCursor from '@/components/ui/CustomCursor'
 
@@ -29,6 +29,10 @@ export function RootLayoutInner({ children }: { children: React.ReactNode }) {
   const [mousepos, setMousepos] = useState<{ x: number; y: number }>()
   const [renderedStyles, setRenderedStyles] = useState<RenderedStyleProps[]>([])
   const [requestId, setRequestId] = useState<number | null>(null)
+
+  const rows = useMemo(() => {
+    return generateRows(5, 7, 20)
+  }, [])
 
   useEffect(() => {
     setWinsize({ width: window.innerWidth, height: window.innerHeight })
@@ -64,6 +68,8 @@ export function RootLayoutInner({ children }: { children: React.ReactNode }) {
 
   /* Init rendered style */
   useEffect(() => {
+    if (!rows) return null
+
     const gridRows = gridRef.current.querySelectorAll('.row')
     const numRows = gridRows.length
 
@@ -109,7 +115,7 @@ export function RootLayoutInner({ children }: { children: React.ReactNode }) {
       }
     })
     setRenderedStyles(newRenderedStyles)
-  }, [])
+  }, [rows])
 
   /* Animate background images */
   useEffect(() => {
@@ -201,7 +207,7 @@ export function RootLayoutInner({ children }: { children: React.ReactNode }) {
     startRendering()
 
     return () => stopRendering()
-  }, [winsize, requestId])
+  }, [winsize, requestId, rows])
 
   /* Transition to fullview */
   const enterFullview = () => {
@@ -282,7 +288,7 @@ export function RootLayoutInner({ children }: { children: React.ReactNode }) {
         </header>
         <section className="intro">
           <div className="grid" ref={gridRef}>
-            <BackgroundImages />
+            {rows}
           </div>
           <div className="fullview" ref={fullviewRef}></div>
           <div
